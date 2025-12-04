@@ -9,13 +9,13 @@
 # }
 
 
-#' MSVar for Identifying Hypervariability proteins and Differentially Variable
+#' MSVar for Identifying Hypervariable proteins and Differentially Variable
 #' proteins
 #'
 #' \code{MSVar} is designed for isobaric labeling-based mass spectrometry (ILMS)
 #' quantitative proteomic profiling to identify hypervariable proteins for a
 #' single group of samples and differentially variable proteins between
-#' different groups via similar procedures.
+#' different sample groups.
 #'
 #'
 #' @section Maintainer: Xuan Guo <\email{guoxuan2020@@sinh.ac.cn}>
