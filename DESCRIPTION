@@ -1,0 +1,19 @@
+Package: MSVar
+Type: Package
+Title: Identifying Hypervariability proteins and Differentially Variable proteins
+Version: 1.0.0
+Author: Xuan Guo
+Maintainer: The package maintainer <guoxuan2020@sinh.ac.cn>
+Description: MSVar is designed for isobaric labeling-based mass spectrometry 
+    (ILMS) quantitative proteomic profiling to identify hypervariable proteins 
+    for a single group of samples and differentially variable proteins between 
+    different groups via similar procedures.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports: stats, grDevices, graphics, methods, locfit, 
+    scales, snowfall, splines, gridExtra, utils
+RoxygenNote: 7.3.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
