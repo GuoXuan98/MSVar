@@ -115,6 +115,30 @@ HCC.G2 <- names(HCC.tumor.DVP.2CRes)[HCC.tumor.DVP.2CRes == 2]
 # MSVar fits the single-group model separately for Group1 & Group2, and then
 # conduct differential expression analysis between Group1 & Group2.
 
+# Extract batch information and intensity for samples in Group1.
+HCC.batch.info.G1 <- t(sapply(1:nrow(HCC.batch.info.tumor), function(i) {
+  temp <- HCC.batch.info.tumor[i, ] %in% HCC.G1
+  temp[1] <- T
+
+  sample.info <- HCC.batch.info.tumor[i, ]
+  sample.info[!temp] <- ""
+
+  unlist(sample.info)
+}))
+HCC.raw.intensity.G1 <- HCC.raw.intensity.tumor[, as.vector(t(HCC.batch.info.G1))[nchar(t(HCC.batch.info.G1)) > 0]]
+
+# Extract batch information and intensity for samples in Group2.
+HCC.batch.info.G2 <- t(sapply(1:nrow(HCC.batch.info.tumor), function(i) {
+  temp <- HCC.batch.info.tumor[i, ] %in% HCC.G2
+  temp[1] <- T
+
+  sample.info <- HCC.batch.info.tumor[i, ]
+  sample.info[!temp] <- ""
+
+  unlist(sample.info)
+}))
+HCC.raw.intensity.G2 <- HCC.raw.intensity.tumor[, as.vector(t(HCC.batch.info.G2))[nchar(t(HCC.batch.info.G2)) > 0]]
+
 # Construct a proObj for the Group1 of tumor samples.
 HCC.tumor.G1 <- proObjFromTMT(HCC.raw.intensity.G1, HCC.batch.info.G1,
                               IDs = rownames(HCC.raw.intensity.G1),
