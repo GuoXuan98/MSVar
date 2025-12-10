@@ -115,6 +115,42 @@ LUAD.G3 <- names(LUAD.tumor.DVP.3CRes)[LUAD.tumor.DVP.3CRes == 3]
 # MSVar fits the single-group model separately for Group1 & Group2, and then
 # conduct differential expression analysis between Group1 & Group2.
 
+# Extract batch information and intensity for samples in Group1.
+LUAD.batch.info.G1 <- t(sapply(1:nrow(LUAD.batch.info.tumor), function(i) {
+  temp <- LUAD.batch.info.tumor[i, ] %in% LUAD.G1
+  temp[6] <- T
+
+  sample.info <- LUAD.batch.info.tumor[i, ]
+  sample.info[!temp] <- ""
+
+  unlist(sample.info)
+}))
+LUAD.raw.intensity.G1 <- LUAD.raw.intensity.tumor[, as.vector(t(LUAD.batch.info.G1))[nchar(t(LUAD.batch.info.G1)) > 0]]
+
+# Extract batch information and intensity for samples in Group2.
+LUAD.batch.info.G2 <- t(sapply(1:nrow(LUAD.batch.info.tumor), function(i) {
+  temp <- LUAD.batch.info.tumor[i, ] %in% LUAD.G2
+  temp[6] <- T
+
+  sample.info <- LUAD.batch.info.tumor[i, ]
+  sample.info[!temp] <- ""
+
+  unlist(sample.info)
+}))
+LUAD.raw.intensity.G2 <- LUAD.raw.intensity.tumor[, as.vector(t(LUAD.batch.info.G2))[nchar(t(LUAD.batch.info.G2)) > 0]]
+
+# Extract batch information and intensity for samples in Group3.
+LUAD.batch.info.G3 <- t(sapply(1:nrow(LUAD.batch.info.tumor), function(i) {
+  temp <- LUAD.batch.info.tumor[i, ] %in% LUAD.G3
+  temp[6] <- T
+
+  sample.info <- LUAD.batch.info.tumor[i, ]
+  sample.info[!temp] <- ""
+
+  unlist(sample.info)
+}))
+LUAD.raw.intensity.G3 <- LUAD.raw.intensity.tumor[, as.vector(t(LUAD.batch.info.G3))[nchar(t(LUAD.batch.info.G3)) > 0]]
+
 # Construct a proObj for the Group1 of tumor samples.
 LUAD.tumor.G1 <- proObjFromTMT(LUAD.raw.intensity.G1, LUAD.batch.info.G1,
                                IDs = rownames(LUAD.raw.intensity.G1),
