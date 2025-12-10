@@ -10,18 +10,14 @@ Contact: guoxuan2020@sinh.ac.cn
 MSVar is designed for isobaric labeling-based mass spectrometry (ILMS) 
 quantitative proteomic profiling to identify hypervariable proteins for a single 
 group of samples and differentially variable proteins between different groups
-via similar procedures. The latest version of MSVar is always available in the 
-[CRAN](https://cran.r-project.org) repository and can thus be easily installed
-by typing `install.packages("MSVar")` in an R session.
+via similar procedures. 
 
-For other versions of MSVar, select a package from under the `dist` folder,
+For latest version of MSVar, select the package from under the `dist` folder,
 download it, and type `install.packages("/path/to/the/package", repos = NULL)`.
 In this way, you may need to pre-install some dependencies of MSVar. The current
 dependencies of the latest MSVar version include locfit (>= 1.5.9), 
 scales (>= 0.3.0), and statmod (>= 1.4.34). All these packages are available in
-the [CRAN](https://cran.r-project.org) repository. For dependencies of other
-MSVar versions, refer to the `Imports` field in the corresponding `DESCRIPTION`
-file.
+the [CRAN](https://cran.r-project.org) repository. 
 
 # Format of Input Data
 
@@ -136,7 +132,7 @@ library(MSVar)
 ProObj <- PostM(ProObj)
 ```
 
-# Hypervariable Analyses
+# Hypervariable Proteins Identification
 
 MSVar identifies hypervariable proteins (HVPs) for a single group of samples by comparing the biological variance estimates $\sigma_i^2$ of all proteins to a pre-specified constant, and the above applications of MSVar were all based on 
 the default setting of this constant, which amounted to an average fluctuation 
@@ -158,7 +154,7 @@ library(MSVar)
 ?VarTest
 ```
 
-# Differentially Variable Analyses
+# Differentially Variable Proteins Identification
 
 The MSVar tests for identifying differentially variable proteins (DVPs) between
 different sample groups it is designed to compare the corresponding biological
@@ -184,4 +180,32 @@ the following code in an R session after installing it:
 ```r
 library(MSVar)
 ?DiffVar
+```
+
+# Differentially Expressed Proteins Identification
+
+The MSVar tests for identifying differentially expressed proteins (DEPs) between
+different sample groups it is designed to compare the corresponding biological
+mean estimates.
+
+For identifying DEPs between two sample groups (say group 1 and 2), MSVar first 
+fits the single-group model separately for each group and create 2 "proObj" 
+objects, namely ProObj1 and ProObj2. An additional index is added to the 
+associated parameters to indicate their groups of origin. For example, 
+$m_{i,1}$ represents log-biological variance of protein $i$ in group 1.
+
+The following code conducts hypothesis testing procedures for identifying DEPs 
+with higher expression level in group 1 under default parameter settings:
+
+```r
+library(MSVar)
+DEP <- DiffMean(ProObj1, ProObj2)
+```
+
+For more information regarding the testing procedure implemented in MSVar, type
+the following code in an R session after installing it:
+
+```r
+library(MSVar)
+?DiffMean
 ```
